@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<img src="bg2.jpg" alt="" class="img">
+<script src="../jquery-3.2.1.min.js"></script>
+<script>
+(function($) {
+	$.fn.breakImg = function(option) {
+		var options = $.extend({
+			path: 5,
+			chrestScale: false,
+			singleScale: false,
+			margin: 0,
+			puzzle: false
+		}, option);
+
+		this.each(function() {
+			var th = $(this),
+				//persent = (100 / options.path) - (options.path * 0.1),
+				persent = (100 / options.path),
+				pathW = (th.width() * persent - options.margin * options.path) / 100,
+				pathH = (th.height() * persent - options.margin * options.path) / 100,
+				paths = $('<div class="paths"></div>'),
+				pathsLenght = options.path * options.path,
+				src = th.attr('src'),
+				backgroundPosition = {left: 0, top: 0},
+				i = 1,
+				indexH = 0,
+				indexW = 0;
+
+			paths.insertBefore(th);
+
+			for (var x = 0; x < pathsLenght; x++) {
+				paths.append('<div class="path"></div>');
+			}
+
+			$('.paths').css({
+				'width': th.width() + options.margin * options.path + 'px',
+				'height': th.height() + options.margin * options.path + 'px',
+				'font-size': '0'
+			});
+
+			$('.path').css({
+				'width': pathW + 'px',
+				'height': pathH + 'px',
+				'background': 'url(' + src + ')',
+				'display': 'inline-block',
+				'transition': 'margin .5s'
+			}).each(function() {
+				var left = -(indexW * pathW),
+					top = -(indexH * pathH);
+
+				$(this).css('background-position', left + 'px ' + top + 'px');
+
+				if ((i % options.path === 0) && (i != 0)) {
+					indexW = 0;
+					indexH++;
+				} else {
+					indexW += 1;
+				}
+
+				i++;
+			});
+
+			if (options.chrestScale) {
+				$('.paths').on('mousemove', function(e) {
+					$('.path').each(function() {
+						var th = $(this),
+							offset = th.offset(),
+							offsetR = offset.left + th.width(),
+							offsetB = offset.top + th.height();
+
+						if (((offset.left < e.pageX) && (offsetR > e.pageX)) || ((offset.top < e.pageY) && (offsetB > e.pageY))) {
+							th.css({
+								'transform': 'scale(1.2)',
+								'z-index': '2'
+							});
+						} else {
+							th.css({
+								'transform': 'scale(1)',
+								'z-index': '1'
+							});
+						}
+					});
+				});
+			}
+
+			if (options.singleScale) {
+				$('.path').hover(function() {
+					$(this).css('transform', 'scale(1.1)')
+				}, function() {
+					$(this).css('transform', 'scale(1)')
+				})
+			}
+
+			if (options.puzzle) {
+				$('.paths').on('mousedown', dragInit);
+
+				function dragInit(e) {
+					var target = $(e.target);
+
+					if (target.hasClass('path')) {
+						var addClone = false,
+							clone,
+							deltaX = event.pageX - getCoords(target).left,
+							deltaY = event.pageY - getCoords(target).top;
+
+						if (!target.hasClass('clone')) {
+							clone = target.clone();
+							clone.addClass('clone').css('z-index', '3');
+						} else {
+							clone = target;
+						}
+
+						$(window)
+							.on('mousemove', drag)
+							.on('mouseup', function() {
+								$(window).off('mousemove', drag);
+							});
+
+						function drag(event) {
+							event.preventDefault();
+							
+							if (!addClone && !target.hasClass('clone')) {
+								clone.css({
+									'position': 'absolute',
+								}).appendTo('.paths');
+
+								addClone = true;
+								target.css('opacity', '0');
+							}
+
+							clone.css({
+								'left': event.pageX - deltaX + 'px',
+								'top': event.pageY - deltaY + 'px'
+							});
+						}
+					}
+				}
+			}
+
+			th.css('display', 'none');
+
+			setTimeout(function() {
+				$('.path').css({'margin': options.margin / 2 + 'px'})
+			}, 500);
+
+			function getCoords(el) {
+				var c = el.get(0).getBoundingClientRect();
+
+				return {
+					left: c.left + pageXOffset,
+					top: c.top + pageYOffset
+				}
+			}
+		})
+	}
+})(jQuery);
+
+$(document).ready(function() {
+	$('.img').breakImg({
+		path: 6,
+		chrestScale: false,
+		singleScale: false,
+		margin: 5,
+		puzzle: true
+	});
+})
+</script>
+</body>
+</html>

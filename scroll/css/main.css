@@ -1,0 +1,21 @@
+* {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	backfase-visibility: hidden!important;
+	-webkit-backfase-visibility: hidden!important;
+}
+
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.path {
+	overflow: hidden;
+	position: relative;
+}
+
+.path:hover {
+	/* transform: scale(1.2); */
+}
