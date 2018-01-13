@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>freedom</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+	<div class="blank"></div>
+</div>
+<script>
+	if (window.DeviceOrientationEvent) {
+	    window.addEventListener('deviceorientation', deviceOrientationHandler, false);
+	}
+
+	function deviceOrientationHandler(evt) {
+		var rotation = "rotateZ("+ evt.alpha +"deg) rotateX("+ (evt.beta - 90) +"deg)  rotateY(" + evt.gamma + "deg)",
+			elem = document.querySelector('.blank');
+
+        elem.style.webkitTransform = rotation;
+        elem.style.transform = rotation;
+	}
+</script>
+</body>
+</html>

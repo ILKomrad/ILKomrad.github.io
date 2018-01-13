@@ -1,0 +1,24 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.blank {
+	background: red;
+	width: 60%;
+	height: 60%;
+	margin: auto;
+}
+.wrap {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	perspective: 1000px;
+	transform-style: preserve-3d;
+}

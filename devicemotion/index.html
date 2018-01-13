@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>freedom</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="one">dd<br>dd<br>dd<br>dd<br>dd<br>dd<br>dd<br>dd</div>
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		var one = document.querySelector('.one');
+		console.log('clientHeight: ' + one.clientHeight, 
+					'scrollHeight: ' + one.scrollHeight,
+					'clientWidth: ' + one.clientWidth,
+					'offsetWidth: ' + one.offsetWidth,
+					'clientLeft: ' + one.clientLeft,
+					'offsetTop: ' + one.offsetTop,
+					'scrollTop: ' + one.scrollTop);
+
+		one.addEventListener('scroll', () => {
+			console.log(one.scrollTop)
+		})
+	})
+</script>
+</body>
+</html>
