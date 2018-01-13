@@ -14,10 +14,16 @@
 	var nodeAG = document.getElementById('accelerationIncludingGravity');
 	var nodeAG2 = document.getElementById('accelerationIncludingGravity2');
 	var maxAG = 0;
+	var prevZ;
 
 	function onMotionChange(e) {
-		// покажем значения параметров в реальном времени
-		nodeAG2.innerHTML = e.accelerationIncludingGravity.z + " \n " + e.accelerationIncludingGravity.x + " \n " + e.accelerationIncludingGravity.y
+		if (!prevZ) { prevZ = e.accelerationIncludingGravity.z }
+		
+		if (prevZ >= e.accelerationIncludingGravity.z) {
+			nodeAG2.innerHTML = 'от себя';
+		} else {
+			nodeAG2.innerHTML = 'на себя'
+		}
 	}
 
 	window.addEventListener('devicemotion', onMotionChange, true);
