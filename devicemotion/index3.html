@@ -37,7 +37,7 @@
 		if (ag.y > ag.x && ag.y > ag.z){ nodeAG.innerHTML += '<span>Вертикально перед собой</span>';}
 		if (ag.z > ag.x && ag.z > ag.y){ nodeAG.innerHTML += '<span>На столе</span>';}
 
-		nodeAG2.innerHTML = acceleration.z
+		nodeAG2.innerHTML = e.acceleration.z
 	}
 
 	window.addEventListener('devicemotion', onMotionChange, true);
