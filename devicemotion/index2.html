@@ -13,8 +13,10 @@
 <script>
 	if (window.DeviceOrientationEvent) {
 	    window.addEventListener('deviceorientation', deviceOrientationHandler, false);
+
 	    window.addEventListener("orientationchange", function(event) {
 		    event.preventDefault();
+		}, false);
 	}
 
 	function deviceOrientationHandler(evt) {
