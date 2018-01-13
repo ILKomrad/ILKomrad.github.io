@@ -8,9 +8,6 @@
 </head>
 <body>
 <div class="wrap">
-	<div id="accelerationIncludingGravity">
-		Откройте этот пример в браузере с поддержеой devicemotion (Android 3+, Iphone 4.2 +)
-	</div>
 	<div id="accelerationIncludingGravity2"></div>
 </div>
 <script>
@@ -20,7 +17,7 @@
 
 	function onMotionChange(e) {
 		// покажем значения параметров в реальном времени
-		nodeAG2.innerHTML = e.accelerationIncludingGravity.z;
+		nodeAG2.innerHTML = e.accelerationIncludingGravity.z + " \n " + e.accelerationIncludingGravity.x + " \n " + e.accelerationIncludingGravity.y
 	}
 
 	window.addEventListener('devicemotion', onMotionChange, true);
