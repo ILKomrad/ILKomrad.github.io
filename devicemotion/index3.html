@@ -16,15 +16,15 @@
 	var prevZ;
 
 	function onMotionChange(e) {
-		if (!prevZ) { prevZ = e.accelerationIncludingGravity.z }
+		if (!prevZ) { prevZ = e.acceleration.z }
 		
-		if (prevZ > e.accelerationIncludingGravity.z) {
+		if (prevZ > e.acceleration.z) {
 			nodeAG2.innerHTML = 'от себя';
-		} else if (prevZ < e.accelerationIncludingGravity.z) {
+		} else if (prevZ < e.acceleration.z) {
 			nodeAG2.innerHTML = 'на себя'
 		}
 		
-		prevZ = e.accelerationIncludingGravity.z
+		prevZ = e.acceleration.z
 	}
 
 	window.addEventListener('devicemotion', onMotionChange, true);
