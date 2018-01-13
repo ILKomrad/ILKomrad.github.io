@@ -17,9 +17,9 @@
 
 	function onMotionChange(e) {
 		if (e.acceleration.z > 0) {
-			nodeAG2.innerHTML = 'от себя';
+			nodeAG2.style.backgroundColor = 'red';
 		} else if (e.acceleration.z < 0) {
-			nodeAG2.innerHTML = 'на себя'
+			nodeAG2.style.backgroundColor = 'black';
 		}
 	}
 
