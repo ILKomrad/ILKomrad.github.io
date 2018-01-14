@@ -16,18 +16,9 @@
 	}
 
 	function deviceOrientationHandler(evt) {
-		var x = evt.beta;  // In degree in the range [-180,180]
-                var y = evt.gamma;
-		
-		if (x >  90) { x =  90};
-                if (x < -90) { x = -90};
-		
-		 x += 90;
-                 y += 90;
-		
-		var rotation = "rotateX("+ x +"deg) rotateY(" + y + "deg)",
-			elem = document.querySelector('.blank');		
-            elem.style.webkitTransform = rotation;
+		var rotation = "rotateZ("+ evt.gamma * -1 +"deg) rotateX("+ (evt.beta - 90) +"deg)  rotateY(" + evt.alpha * -1 + "deg)",
+			elem = document.querySelector('.blank');			
+
             elem.style.transform = rotation;
 	}
 </script>
