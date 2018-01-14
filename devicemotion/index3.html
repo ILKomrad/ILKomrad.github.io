@@ -16,7 +16,7 @@
 	var prevZ;
 
 	function onMotionChange(e) {
-		if (e.acceleration.z > 4) {
+		if (e.acceleration.y > 4) {
 			nodeAG2.style.backgroundColor = 'red';
 		} else if (e.acceleration.z < 0) {
 			nodeAG2.style.backgroundColor = 'black';
