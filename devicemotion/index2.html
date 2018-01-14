@@ -16,7 +16,7 @@
 	}
 
 	function deviceOrientationHandler(evt) {
-		var rotation = "rotateX("+ ((evt.beta - 90) / 2) +"deg)rotateY(" + ((evt.alpha * -1) / 2) + "deg)",
+		var rotation = "rotateX("+ ((evt.beta - 90) / 2) +"deg) rotateY(" + ((evt.alpha * -1) / 2) + "deg)",
 			elem = document.querySelector('.blank');		
             elem.style.webkitTransform = rotation;
             elem.style.transform = rotation;
